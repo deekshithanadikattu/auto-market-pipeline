@@ -1,0 +1,48 @@
+name: daily-pipeline
+
+on:
+  schedule:
+    # 22:00 UTC, Monday-Friday: after the US close (20:00-21:00 UTC).
+    # India (10:00 UTC) and Japan (06:30 UTC) closed earlier the same day.
+    - cron: "0 22 * * 1-5"
+  workflow_dispatch:        # adds a "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write           # needed to push the updated warehouse file
+
+concurrency:
+  group: daily-pipeline     # never let two runs write the database at once
+  cancel-in-progress: false
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run pipeline (extract -> dbt build)
+        run: python run_pipeline.py
+
+      - name: Commit updated warehouse
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/warehouse.duckdb
+          if git diff --cached --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "data: daily refresh $(date -u +%Y-%m-%d)"
+            git push
+          fi

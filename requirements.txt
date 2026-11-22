@@ -1,0 +1,8 @@
+yfinance>=0.2.54
+duckdb>=1.1
+pandas>=2.2
+dbt-core>=1.10
+dbt-duckdb>=1.9
+streamlit>=1.48
+plotly>=5.24
+pytest>=8.0

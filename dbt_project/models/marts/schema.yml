@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: dim_company
+    description: "Company dimension built from seeds/companies.csv."
+    columns:
+      - name: ticker
+        data_tests:
+          - unique
+          - not_null
+      - name: segment
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["Two-wheeler", "Four-wheeler"]
+
+  - name: fct_daily_prices
+    description: "Fact table. Grain: one row per ticker per trading day."
+    columns:
+      - name: price_id
+        data_tests:
+          - unique
+          - not_null
+      - name: ticker
+        description: "Foreign key to dim_company."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_company')
+                field: ticker
+      - name: close_price
+        data_tests:
+          - positive_value
+
+  - name: mart_monthly_performance
+    description: "Monthly return, average volume and volatility per company."
+    columns:
+      - name: month_id
+        data_tests:
+          - unique
+          - not_null
+      - name: company_name
+        description: "Null here means a ticker is in raw data but missing from the seed."
+        data_tests:
+          - not_null

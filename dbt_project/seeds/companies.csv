@@ -1,0 +1,10 @@
+ticker,company_name,country,segment,currency
+MARUTI.NS,Maruti Suzuki India,India,Four-wheeler,INR
+M&M.NS,Mahindra & Mahindra,India,Four-wheeler,INR
+TVSMOTOR.NS,TVS Motor Company,India,Two-wheeler,INR
+BAJAJ-AUTO.NS,Bajaj Auto,India,Two-wheeler,INR
+HEROMOTOCO.NS,Hero MotoCorp,India,Two-wheeler,INR
+EICHERMOT.NS,Eicher Motors (Royal Enfield),India,Two-wheeler,INR
+TM,Toyota Motor (NYSE ADR),Japan,Four-wheeler,USD
+HMC,Honda Motor (NYSE ADR),Japan,Four-wheeler,USD
+7269.T,Suzuki Motor Corporation,Japan,Four-wheeler,JPY

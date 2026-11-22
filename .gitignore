@@ -1,0 +1,21 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# dbt build output
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+logs/
+
+# DuckDB temp files (the .duckdb file itself IS committed - see README trade-offs)
+*.duckdb.wal
+data/*.tmp
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+.user.yml

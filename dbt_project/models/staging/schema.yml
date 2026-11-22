@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_prices
+    description: "Cleaned daily prices. Grain: one row per ticker per trading day."
+    columns:
+      - name: price_id
+        description: "Surrogate key: ticker + trade date."
+        data_tests:
+          - unique
+          - not_null
+      - name: ticker
+        data_tests:
+          - not_null
+      - name: trade_date
+        data_tests:
+          - not_null
+      - name: close_price
+        data_tests:
+          - not_null
+          - positive_value

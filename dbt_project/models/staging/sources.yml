@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw data loaded by extract/extract_prices.py. Never edited by dbt."
+    schema: raw
+    tables:
+      - name: prices
+        description: "Daily OHLCV prices from Yahoo Finance, one row per ticker per trading day."
+        columns:
+          - name: ticker
+          - name: date
+          - name: close
+          - name: ingested_at
+            description: "UTC time the row was last written by the extract script."

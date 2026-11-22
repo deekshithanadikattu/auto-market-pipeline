@@ -1,0 +1,9 @@
+auto_market:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      # run_pipeline.py sets DUCKDB_PATH to an absolute path.
+      # The default works when you run dbt by hand from inside dbt_project/.
+      path: "{{ env_var('DUCKDB_PATH', '../data/warehouse.duckdb') }}"
+      threads: 4
