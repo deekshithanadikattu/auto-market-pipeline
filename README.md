@@ -1,10 +1,12 @@
-# 🚗 Auto Industry Market Data Pipeline
+# Auto Industry Market Data Pipeline
 
 An automated ELT pipeline that pulls daily stock prices for 9 automotive companies (India, Japan, US listings), loads them into a DuckDB warehouse, models them with dbt into a tested star schema, runs itself every weekday on GitHub Actions, and serves a live Streamlit dashboard.
 
-**Live dashboard:** `<paste your Streamlit link here>`
+**Live dashboard:** [auto-market-pipeline.streamlit.app](https://auto-market-pipeline-nadikattu.streamlit.app/)
 
-![Architecture](docs/architecture.png)
+![Dashboard](docs/dashboard.png)
+
+
 
 ## Architecture
 
@@ -20,6 +22,7 @@ yfinance API ──► Python extract ──► DuckDB  raw.prices
 
 GitHub Actions runs extract + dbt every weekday at 22:00 UTC
 ```
+![Architecture](docs/architecture.png)
 
 ## Tech stack
 
@@ -92,3 +95,5 @@ For v1 the DuckDB file is committed back to the repo by the scheduled job. That'
 
 ---
 Data from Yahoo Finance via yfinance, for educational use only.
+
+Built by **Deekshitha Reddy Nadikattu** · [LinkedIn](https://www.linkedin.com/in/deekshitha-reddy-nadikattu-ba1b17290/)
